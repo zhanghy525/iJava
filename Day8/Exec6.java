@@ -3,27 +3,27 @@ public class Exec6{
 	public static void main(String[] args){
 
 		Student stu1 = new Student();
-		stu1.name = "Íõ„‚ÃÀ";
+		stu1.name = "ç‹å‰›ç¾";
 		stu1.age = 18;
-		stu1.gender ='ÄĞ';
+		stu1.gender ='ç”·';
 		stu1.score = 88;//-14=74
 
 		Student stu2 = new Student();
-		stu2.name = "Íõûû";
+		stu2.name = "ç‹éº—éº—";
 		stu2.age = 20;
-		stu2.gender ='Å®';
+		stu2.gender ='å¥³';
 		stu2.score = 93;//74
 
 		Student stu3 = new Student();
-		stu3.name = "Úw´ä»¨";
+		stu3.name = "è¶™ç¿ èŠ±";
 		stu3.age = 22;
-		stu3.gender ='ÄĞ';
+		stu3.gender ='ç”·';
 		stu3.score = 51;//74
 
 		Student stu4 = new Student();
-		stu4.name = "°×Ê¯";
+		stu4.name = "ç™½çŸ³";
 		stu4.age = 20;
-		stu4.gender ='ÄĞ';
+		stu4.gender ='ç”·';
 		stu4.score = 66;//74
 
 		data[0] = stu1;
@@ -31,13 +31,15 @@ public class Exec6{
 		data[2] = stu3;
 		data[3] = stu4;
 
-		//µÃµ½È«°àµÄ¿‚·Ö
-		delate(1);
+		//å¾—åˆ°å…¨ç­çš„ç¸½åˆ†
+		show2();
+		show3();
+		show4();
 
 	}
 
 	public static int show() {
-		//ï@Ê¾È«°àËùÓĞÈËµÄ·Ö”µ
+		//é¡¯ç¤ºå…¨ç­æ‰€æœ‰äººçš„åˆ†æ•¸
 		int sum = 0;
 		for(Student stu : data){
 			sum += stu.score;
@@ -45,56 +47,28 @@ public class Exec6{
 		return sum;
 	}
 
-	//´òÓ¡XXXÍ¬ŒW>Æ½¾ù·Ö¶àÉÙ·Ö
+	//æ‰“å°XXXåŒå­¸>å¹³å‡åˆ†å¤šå°‘åˆ†
 	public static void show2() {
 		int sum  = show();
 		int avg = sum / data.length;
 		for(Student stu : data){
 			if(stu.score>avg){
-				System.out.println(stu.name+"¸ßÓÚÆ½¾ù·Ö"+(stu.score-avg)+"·Ö");
+				System.out.println(stu.name+"é«˜äºå¹³å‡åˆ†"+(stu.score-avg)+"åˆ†");
 			}
 		}
 	}
-	//·âÑb·½·¨ ÓÃíÒÔ±íµÄĞÎÊ½ï@Ê¾ÄÚÈİ
+	//å°è£æ–¹æ³• ç”¨ä¾†ä»¥è¡¨çš„å½¢å¼é¡¯ç¤ºå†…å®¹
 	public static void show3(){
-		System.out.println("¾´a"+"\t"+"ĞÕÃû"+"\t"+"ĞÔ„e"+"\t"+"Äêıg"+"\t"+"·Ö”µ");
-		for(int x=0;x<data.length;x++){
-			System.out.println(x +"\t"+data[x].name+"\t"+data[x].gender+"\t"+data[x].age+"\t"+data[x].score);
+		System.out.println("ç·¨ç¢¼"+"\t"+"å§“å"+"\t"+"æ€§åˆ¥"+"\t"+"å¹´é½¡"+"\t"+"åˆ†æ•¸");
+		for(int x=0;x<data.length;){
+			System.out.println(x++ +"\t"+data[x].name+"\t"+data[x].gender+"\t"+data[x].age+"\t"+data[x].score);
 		}
 	}
 	public static void show4(){
-			//System.out.println("¾´a"+"\t"+"ĞÕÃû"+"\t"+"ĞÔ„e"+"\t"+"Äêıg"+"\t"+"·Ö”µ");
+			//System.out.println("ç·¨ç¢¼"+"\t"+"å§“å"+"\t"+"æ€§åˆ¥"+"\t"+"å¹´é½¡"+"\t"+"åˆ†æ•¸");
 			for(int x=0;x<data.length;){
 				System.out.println(x++);
 			}
-	}
-
-	public static void delate(int x){
-		show3();
-		//x=0;
-		//x=1;
-		//x=3
-		if(x>=data.length){
-			System.out.println("ÕˆÖØĞÂİ”Èë¾Ì–£¬¾Ì–µÄ¹ ‡úÊÇ0-"+(data.length-1));
-		}else{
-			Student[] temp = new Student[data.length-1];//×¢Òâ”µ“şîĞÍ
-			if(x==0){
-				System.arraycopy(data,1,temp,0,data.length-1);
-			}else if(x==data.length-1){
-				System.arraycopy(data,0,temp,0,data.length-1);
-			}else{
-				//x=1
-				System.arraycopy(data,0,temp,0,x);
-				//0,0,1
-				System.arraycopy(data,x+1,temp,x,temp.length-x);
-				//2,1,2
-			}
-			//·½·¨2,ÕæºÃ
-			//System.arraycopy(data,1,data,x-1,temp.length-x);
-			//System.arraycopy(data,0,temp,0,temp.length);
-			data=temp;//°ÑĞÂ£¨¶ÑÄÚ´æ£©µØÖ·½»½odata£¬ÀÏ”µ“ş•ş×Ô„Ó±»»ØÊÕ
-			show3();
-		}
 	}
 }
 class Student{
@@ -102,5 +76,4 @@ class Student{
 	int age;
 	char gender;
 	int score;
-
 }
