@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	xml定义
+	       dtd      类型  string
+	       schema   类型  string int datetime
+	       
+	Object object = new Object();
+	
+	w3c
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    class  class 类名
+	targetNamespace="http://www.springframework.org/schema/beans"
+	          类名
+	          
+	w3c
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     new
+	 xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       	  对象  Object()
+	 xmlns="http://www.springframework.org/schema/beans"
+	    Object object =
+	    
+	    Object object = new Object();
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	<!-- 
+		1.setter注入
+		   bean元素 
+		   		class属性表示实例对象 Student
+		   		id属性 别名  随便起名  但是要唯一
+		   property元素
+		             setter注入方式使用元素property
+		             name属性表示定义是类中字段属性，
+		                               在底层代码中实现反射setId setName setAge
+		             value属性注入值（赋值） 
+	 -->
+	<bean id="stu" class="com.etoak.bean.Student">
+		<property name="id" value="1"></property>
+		<property name="name" value="易途"></property>
+		<property name="age" value="10"></property>
+	</bean>
+	
+	<!-- 
+		2.构造方法注入 变量名称
+		public Student(String id, String name, Integer age)
+	 -->
+	<bean id="stuC" class="com.etoak.bean.Student">
+		<constructor-arg name="id" value="et1710"></constructor-arg>
+		<constructor-arg name="name" value="etoak"></constructor-arg>
+		<constructor-arg name="age" value="10"></constructor-arg>
+	</bean>
+	
+	<!-- 
+		2.构造方法注入 下标索引  下标从0开始
+	 -->
+	<bean id="stuI" class="com.etoak.bean.Student">
+		<constructor-arg index="0" value="et"></constructor-arg>
+		<constructor-arg index="1" value="易途"></constructor-arg>
+		<constructor-arg index="2" value="10"></constructor-arg>
+	</bean>
+	
+	<!-- 
+		3.普通方法注入 或 工厂方法注入
+		lookup-method元素
+		              name属性表示调用的方法名称
+		              bean属性表示引入配置文件当中某个bean元素属性id值  参考
+		                             例如<bean id="stu">
+	 -->
+	 <bean id="methodStu" class="com.etoak.bean.ClassRoom">
+	 	<lookup-method name="getStu" bean="stu" />
+	 </bean>
+	
+	
+</beans>
+
+
+
+
+
+

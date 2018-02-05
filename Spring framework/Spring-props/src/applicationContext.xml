@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	<!-- 
+		init-method属性表示初始化一个方法  
+			自定义方法不能有参数 实例化对象（构造方法之后）之后执行
+		destroy-method属性表示销毁方法 
+				自定义方法不能有参数 容器关闭之后执行
+		parent属性表示继承某个bean元素id属性  等价java中关键字 extends
+		lazy-init属性true懒加载   
+			true 容器启动不会初始化对象
+			false 容器启动会初始化对象
+		abstract属性表示把对象设置成抽象类
+	 -->
+	
+	
+	<!-- 
+		实例化对象student 
+	-->
+	<bean id="student" 
+	      class="com.etoak.bean.Student"
+	      init-method="init"
+	      destroy-method="destroy"
+	      lazy-init="true"
+	      abstract="true">
+		<property name="id" value="et1710"></property>
+	</bean>
+	
+	<!-- 
+		当前bean元素通过parent属性继承student对象  bean id="student"
+	 -->
+	<bean id="stu" parent="student">
+		<property name="name" value="张三"></property>
+	</bean>
+	
+</beans>

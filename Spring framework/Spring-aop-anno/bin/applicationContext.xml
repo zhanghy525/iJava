@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+    <!-- 扫描注解 ioc  @Controller @Component @Autowired等 -->
+	<context:component-scan base-package="com.etoak" />	
+	
+	<!-- 	
+			扫描注解 aop 
+			@Aspect 
+				@Pointcut @Before @AfterReturning
+				@Around @AfterThrowing
+				
+		proxy-target-class 设置动态代理模式  jdk代理 cglib代理
+		
+		false 默认     jdk代理
+		true       cglib代理
+		
+		默认false 先找jdk代理  没有找到jdk代理，
+		                   底层会强制转换cglib代理
+	-->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	
+	
+</beans>

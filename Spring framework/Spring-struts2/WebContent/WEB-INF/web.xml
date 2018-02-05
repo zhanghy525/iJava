@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Spring-struts2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- spring start -->
+ <!--  	<listener>
+  		<listener-class>
+  			com.etoak.servlet.AppListener
+  		</listener-class>
+  	</listener> -->
+  	
+  	<!-- 
+  		spring容器默认加载配置文件路径为：WEB-INF/appliactionContext.xml
+  	 -->
+  	<listener>
+  		<listener-class>
+  			org.springframework.web.context.ContextLoaderListener
+  		</listener-class>
+  	</listener>
+  	<!-- 指定spring配置文件路径  -->
+  	<context-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<!-- <param-value>WEB-INF/appliactionContext.xml</param-value> -->
+  		<!-- 
+  			classpath本工程找配置
+  			classpath*本工程和jar下找配置
+  		 -->
+  		<param-value>classpath:applicationContext*.xml</param-value>
+  	</context-param>
+   <!-- spring end -->
+   
+   <!-- struts2 start -->
+   <filter>
+  	<filter-name>struts2</filter-name>
+  	<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+   </filter>
+   <filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>*.action</url-pattern>
+   </filter-mapping>
+   <!-- struts2 end -->
+   
+</web-app>

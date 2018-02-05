@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--  class="loginAction" 交给spring管理 -->
+	<package name="etoak" extends="struts-default">
+		<!-- strtus2 2.5支持通配符写法 -->
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+		
+		<action name="login" 
+		        class="loginAction" 
+		        method="login">
+			<result name="success">success.jsp</result>
+		</action>
+	</package>
+</struts>

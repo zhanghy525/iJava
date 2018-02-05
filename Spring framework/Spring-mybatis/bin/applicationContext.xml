@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	
+	<!-- 扫描ioc注解 -->
+	<context:component-scan base-package="com.etoak" />
+	
+	<!-- 
+		1.数据源
+	 -->
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	 	<!-- 驱动 -->
+	 	<property name="driverClassName"
+	 				 value="com.mysql.jdbc.Driver"></property>
+	 	<!-- 连接 -->
+	 	<property name="url" 
+	 				 value="jdbc:mysql://localhost:3306/et1710"></property>
+	 	<!-- 用户名 -->
+	 	<property name="username" 
+	 				value="root"></property>
+	 	<!-- 密码 -->
+	 	<property name="password"
+	 				value="mjylst"></property>
+	 </bean>
+	 
+	 <!-- 
+	 	2.使用什么持久层框架？mybatis
+	 	Configuration configuration = new Configuration("xml");
+	 	SqlSessionFactory sqlSessionFactory = 
+	 			configuration.buildSqlSessionFactory();
+	  -->
+	 <bean id="sqlSessionFactory" 
+	 	   class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<!-- 注入数据源 -->
+	 	<property name="dataSource" ref="dataSource"></property>
+	 	<!-- 扫描sql配置文件  名称.xml-->
+	 	<property name="mapperLocations">
+	 		<list>     
+	 			<value>com/etoak/mapper/*.xml</value>
+	 		</list>
+	 	</property>
+	 	<!-- 
+	 		实体对象 起别名 
+	 		扫描包结构
+	 		不要使用通配符*
+	 		例如com.etoak.bean.User
+	 		   默认别名名称为：类型首字母小写   user
+	 	-->
+	 	<property name="typeAliasesPackage" 
+	 				value="com.etoak.bean"></property>
+	 	<!-- 插件 -->
+	 	<property name="plugins">
+	 		<array>
+	 			<!-- 配置分页插件pagehelper -->
+	 			<bean class="com.github.pagehelper.PageHelper">
+	 				<property name="properties">
+	 					<props>
+	 						<!-- 设置方言 -->
+	 						<prop key="dialect">mysql</prop>
+	 					</props>
+	 				</property>
+	 			</bean>
+	 		</array>
+	 	</property>
+	 </bean>
+	 
+	 <!-- 
+	 	扫描接口 
+	 		SqlSession session = sqlSessionFactory.openSession();	
+	 		User user = (User)session.getMapper(User.class);
+	 		user.add();
+	 		
+	 		getMapper动态代理设计模式
+	 -->
+	 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	 	<!-- 
+	 		注入sqlsessionFactory对象   
+	 		getBean("sqlSessionFactory")
+	 		sqlSessionFactoryBeanName属性可以省略
+	 		省略默认找SqlSessionFactoryBean类型
+	 		getBean(sqlSessionFactoryBean.class)
+	 	-->
+	 	<property name="sqlSessionFactoryBeanName" 
+	 				   value="sqlSessionFactory"></property>
+	 	<!-- 
+	 		扫描接口并实例化   接口名称.java
+	 	-->
+	 	<property name="basePackage"
+	 					value="com.etoak.mapper"></property>
+	 </bean>
+	 
+	 
+	 <!-- 4.配置事务管理器 -->
+	 <bean id="tx" 
+	 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<!-- 注入数据源对象交给事务管理器 -->
+	 	<property name="dataSource" ref="dataSource"></property>
+	 </bean>
+	 
+	 <!-- 5.注解事务 -->
+	 <tx:annotation-driven transaction-manager="tx"/>
+	 
+</beans>

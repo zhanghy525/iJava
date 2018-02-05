@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- 
+		实例化对象ObjectBean 
+		value   
+			基本数据类型  int  
+			包装类型  Integer   
+			字符串    String
+		ref
+			对象  javabean  类  
+	-->
+	<bean id="ob" class="com.etoak.bean.ObjectBean">
+		<!-- 注入集合list -->
+		<property name="lists">
+			<list>
+				<value>易途</value>
+				<value>etoak</value>
+				<value>et</value>
+			</list>
+		</property>
+		<!-- 注入集合set -->
+		<property name="sets">
+			<set>
+				<value>北京</value>
+				<value>上海</value>
+				<value>重庆</value>
+				<value>天津</value>
+			</set>
+		</property>
+		<!-- 注入集合map -->
+		<property name="maps">
+			<map>
+				<entry key="etoak" value="易途"></entry>
+				<entry key="et" value="et1710"></entry>
+			</map>
+		</property>
+		<!-- 注入集合properties -->
+		<property name="props">
+			<props>
+				<prop key="jn">济南</prop>
+				<prop key="qd">青岛</prop>
+			</props>
+		</property>
+		<!-- 
+			注入对象student 
+			ref属性表示引入（参考）某个bean元素id属性值 例如 bean id=“stu”
+		-->
+		<property name="stu" ref="stu"></property>
+		<!-- <property name="stu">
+			<ref bean="stu"/>
+		</property> -->
+		<!-- <property name="stu">
+			<bean id="stu" class="com.etoak.bean.Student">
+				<property name="id" value="2"></property>
+				<property name="name">
+					<value>张三</value>
+				</property>
+			</bean>
+		</property> -->
+	</bean>
+	
+	<!-- 实例化对象Student -->
+	<bean id="stu" class="com.etoak.bean.Student">
+		<property name="id" value="2"></property>
+		<property name="name">
+			<value>张三</value>
+		</property>
+	</bean>
+
+</beans>

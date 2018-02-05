@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	<!-- 
+		factory-bean   
+				属性表示 引入某个bean元素id属性
+				实例对象
+		factory-method
+		       	属性表示调用某个对象的方法名称
+		当factory-bean 、factory-method组合 表示实例工厂  
+		当class 、factory-method组合 表示静态工厂
+	 -->
+	
+	<!-- 实例化对象student -->
+	<bean id="student" class="com.etoak.bean.Student" />
+	
+	<!-- 
+		1.实例工厂   无参数
+		Student student = new Student();
+		String str = student.getStu();
+	 -->
+	<bean id="getStu" 
+		  factory-bean="student" 
+		  factory-method="getStu" />
+	
+	<!-- 
+		实例工厂 有参数
+	 -->	  
+	<bean id="getStuParam" 
+	      factory-bean="student" 
+	      factory-method="getStuParam">
+		<constructor-arg value="我是小明，我要去上学！" />
+	</bean>
+	
+	
+	<!-- 
+		2.静态工厂 无参数
+		Student.getStaticStu();
+	 -->
+	<bean id="getStaticStu" 
+		  class="com.etoak.bean.Student" 
+		  factory-method="getStaticStu"/>
+	
+	
+	<!-- 
+		2.静态工厂 有参数
+		Student.getStaticStuParam(String str);
+	 -->
+	<bean id="getStaticStuParam" 
+		  class="com.etoak.bean.Student" 
+		  factory-method="getStaticStuParam">
+		  <constructor-arg value="你瞅啥！瞅你咋地！" />
+ 	</bean>
+	
+	
+	
+</beans>

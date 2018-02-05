@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	
+	<!-- xml管理javabean对象Student -->
+	<bean id="student" class="com.etoak.bean.Student">
+		<!-- javabean对象属性 id name age -->
+		<property name="id" value="et-1710"></property>
+		<property name="name" value="etoak"></property>
+		<property name="age" value="10"></property>
+	</bean>
+	
+	
+	
+</beans>
